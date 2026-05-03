@@ -130,16 +130,20 @@ message GetListTasksRequest {
   optional int64 tag_ids = 2;
   google.protobuf.Timestamp from = 3;
   google.protobuf.Timestamp to = 4;
-  int32 limit = 5;
-  int32 offset = 6;
+  uint64 limit = 5;
+  uint64 offset = 6;
 }
 
-message GetListTasksResponse {
-  repeated Task tasks = 1;
+message TasksTab {
+  Task task = 1;
   int64 total_count = 2;
   string group_name = 3;
   int64 project_id = 4;
   string project_name = 5;
+}
+
+message GetListTasksResponse {
+  repeated TasksTab tasks = 1;
 }
 
 message CreateTagRequest {
@@ -178,8 +182,8 @@ message GetTagResponse {
 }
 
 message GetTagListRequest {
-  int32 limit = 1;
-  int32 offset = 2;
+  uint64 limit = 1;
+  uint64 offset = 2;
 }
 
 message GetTagListResponse {
@@ -259,8 +263,8 @@ message DeleteProjectResponse {
 }
 
 message GetProjectsRequest {
-  int32 limit = 1;
-  int32 offset = 2;
+  uint64 limit = 1;
+  uint64 offset = 2;
 }
 
 message GetProjectsResponse {
