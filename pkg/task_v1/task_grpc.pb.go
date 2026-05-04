@@ -24,6 +24,7 @@ const (
 	TaskService_DeleteTask_FullMethodName        = "/task_v1.TaskService/DeleteTask"
 	TaskService_GetTask_FullMethodName           = "/task_v1.TaskService/GetTask"
 	TaskService_GetListTask_FullMethodName       = "/task_v1.TaskService/GetListTask"
+	TaskService_ArchiveTask_FullMethodName       = "/task_v1.TaskService/ArchiveTask"
 	TaskService_CreateTag_FullMethodName         = "/task_v1.TaskService/CreateTag"
 	TaskService_UpdateTag_FullMethodName         = "/task_v1.TaskService/UpdateTag"
 	TaskService_DeleteTag_FullMethodName         = "/task_v1.TaskService/DeleteTag"
@@ -50,6 +51,7 @@ type TaskServiceClient interface {
 	DeleteTask(ctx context.Context, in *DeleteTaskRequest, opts ...grpc.CallOption) (*DeleteTaskResponse, error)
 	GetTask(ctx context.Context, in *GetTaskRequest, opts ...grpc.CallOption) (*GetTaskResponse, error)
 	GetListTask(ctx context.Context, in *GetListTasksRequest, opts ...grpc.CallOption) (*GetListTasksResponse, error)
+	ArchiveTask(ctx context.Context, in *ArchiveTaskRequest, opts ...grpc.CallOption) (*ArchiveTaskResponse, error)
 	CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*CreateTagResponse, error)
 	UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*UpdateTagResponse, error)
 	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error)
@@ -119,6 +121,16 @@ func (c *taskServiceClient) GetListTask(ctx context.Context, in *GetListTasksReq
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetListTasksResponse)
 	err := c.cc.Invoke(ctx, TaskService_GetListTask_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) ArchiveTask(ctx context.Context, in *ArchiveTaskRequest, opts ...grpc.CallOption) (*ArchiveTaskResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ArchiveTaskResponse)
+	err := c.cc.Invoke(ctx, TaskService_ArchiveTask_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -284,6 +296,7 @@ type TaskServiceServer interface {
 	DeleteTask(context.Context, *DeleteTaskRequest) (*DeleteTaskResponse, error)
 	GetTask(context.Context, *GetTaskRequest) (*GetTaskResponse, error)
 	GetListTask(context.Context, *GetListTasksRequest) (*GetListTasksResponse, error)
+	ArchiveTask(context.Context, *ArchiveTaskRequest) (*ArchiveTaskResponse, error)
 	CreateTag(context.Context, *CreateTagRequest) (*CreateTagResponse, error)
 	UpdateTag(context.Context, *UpdateTagRequest) (*UpdateTagResponse, error)
 	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error)
@@ -323,6 +336,9 @@ func (UnimplementedTaskServiceServer) GetTask(context.Context, *GetTaskRequest) 
 }
 func (UnimplementedTaskServiceServer) GetListTask(context.Context, *GetListTasksRequest) (*GetListTasksResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetListTask not implemented")
+}
+func (UnimplementedTaskServiceServer) ArchiveTask(context.Context, *ArchiveTaskRequest) (*ArchiveTaskResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ArchiveTask not implemented")
 }
 func (UnimplementedTaskServiceServer) CreateTag(context.Context, *CreateTagRequest) (*CreateTagResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateTag not implemented")
@@ -476,6 +492,24 @@ func _TaskService_GetListTask_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TaskServiceServer).GetListTask(ctx, req.(*GetListTasksRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_ArchiveTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ArchiveTaskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).ArchiveTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_ArchiveTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).ArchiveTask(ctx, req.(*ArchiveTaskRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -776,6 +810,10 @@ var TaskService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetListTask",
 			Handler:    _TaskService_GetListTask_Handler,
+		},
+		{
+			MethodName: "ArchiveTask",
+			Handler:    _TaskService_ArchiveTask_Handler,
 		},
 		{
 			MethodName: "CreateTag",

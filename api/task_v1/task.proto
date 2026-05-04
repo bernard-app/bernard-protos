@@ -56,6 +56,8 @@ service TaskService {
   rpc GetTask (GetTaskRequest) returns (GetTaskResponse);
   rpc GetListTask (GetListTasksRequest) returns (GetListTasksResponse);
 
+  rpc ArchiveTask (ArchiveTaskRequest) returns (ArchiveTaskResponse);
+
   rpc CreateTag (CreateTagRequest) returns (CreateTagResponse);
   rpc UpdateTag (UpdateTagRequest) returns (UpdateTagResponse);
   rpc DeleteTag (DeleteTagRequest) returns (DeleteTagResponse);
@@ -144,6 +146,14 @@ message TasksTab {
 
 message GetListTasksResponse {
   repeated TasksTab tasks = 1;
+}
+
+message ArchiveTaskRequest {
+  int64 task_id = 1;
+}
+
+message ArchiveTaskResponse {
+  Task task = 1;
 }
 
 message CreateTagRequest {
