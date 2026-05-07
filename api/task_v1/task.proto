@@ -277,6 +277,8 @@ message DeleteGroupResponse {
 
 message GetGroupRequest {
     int64 group_id = 1;
+    uint64 limit = 2;
+    uint64 offset = 3;
 }
 
 message GetGroupResponse {
@@ -296,6 +298,8 @@ message GetProjectGroupsResponse {
 message CreateProjectRequest {
   string name = 1;
   optional string description = 2;
+  uint64 limit = 3;
+  uint64 offset = 4;
 }
 
 message CreateProjectResponse {

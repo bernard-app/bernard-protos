@@ -2369,6 +2369,8 @@ func (x *DeleteGroupResponse) GetSuccess() bool {
 type GetGroupRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	GroupId       int64                  `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	Limit         uint64                 `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
+	Offset        uint64                 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2406,6 +2408,20 @@ func (*GetGroupRequest) Descriptor() ([]byte, []int) {
 func (x *GetGroupRequest) GetGroupId() int64 {
 	if x != nil {
 		return x.GroupId
+	}
+	return 0
+}
+
+func (x *GetGroupRequest) GetLimit() uint64 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+func (x *GetGroupRequest) GetOffset() uint64 {
+	if x != nil {
+		return x.Offset
 	}
 	return 0
 }
@@ -2562,6 +2578,8 @@ type CreateProjectRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Description   *string                `protobuf:"bytes,2,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	Limit         uint64                 `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
+	Offset        uint64                 `protobuf:"varint,4,opt,name=offset,proto3" json:"offset,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2608,6 +2626,20 @@ func (x *CreateProjectRequest) GetDescription() string {
 		return *x.Description
 	}
 	return ""
+}
+
+func (x *CreateProjectRequest) GetLimit() uint64 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+func (x *CreateProjectRequest) GetOffset() uint64 {
+	if x != nil {
+		return x.Offset
+	}
+	return 0
 }
 
 type CreateProjectResponse struct {
@@ -3223,9 +3255,11 @@ const file_task_proto_rawDesc = "" +
 	"\x12DeleteGroupRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"/\n" +
 	"\x13DeleteGroupResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\",\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"Z\n" +
 	"\x0fGetGroupRequest\x12\x19\n" +
-	"\bgroup_id\x18\x01 \x01(\x03R\agroupId\"8\n" +
+	"\bgroup_id\x18\x01 \x01(\x03R\agroupId\x12\x14\n" +
+	"\x05limit\x18\x02 \x01(\x04R\x05limit\x12\x16\n" +
+	"\x06offset\x18\x03 \x01(\x04R\x06offset\"8\n" +
 	"\x10GetGroupResponse\x12$\n" +
 	"\x05group\x18\x01 \x01(\v2\x0e.task_v1.GroupR\x05group\"f\n" +
 	"\x17GetProjectGroupsRequest\x12\x1d\n" +
@@ -3234,10 +3268,12 @@ const file_task_proto_rawDesc = "" +
 	"\x05limit\x18\x02 \x01(\x04R\x05limit\x12\x16\n" +
 	"\x06offset\x18\x03 \x01(\x04R\x06offset\"B\n" +
 	"\x18GetProjectGroupsResponse\x12&\n" +
-	"\x06groups\x18\x01 \x03(\v2\x0e.task_v1.GroupR\x06groups\"a\n" +
+	"\x06groups\x18\x01 \x03(\v2\x0e.task_v1.GroupR\x06groups\"\x8f\x01\n" +
 	"\x14CreateProjectRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12%\n" +
-	"\vdescription\x18\x02 \x01(\tH\x00R\vdescription\x88\x01\x01B\x0e\n" +
+	"\vdescription\x18\x02 \x01(\tH\x00R\vdescription\x88\x01\x01\x12\x14\n" +
+	"\x05limit\x18\x03 \x01(\x04R\x05limit\x12\x16\n" +
+	"\x06offset\x18\x04 \x01(\x04R\x06offsetB\x0e\n" +
 	"\f_description\"C\n" +
 	"\x15CreateProjectResponse\x12*\n" +
 	"\aproject\x18\x01 \x01(\v2\x10.task_v1.ProjectR\aproject\"\x7f\n" +
