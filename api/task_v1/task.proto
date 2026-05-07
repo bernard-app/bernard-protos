@@ -27,7 +27,7 @@ message Task {
 }
 
 message Tag {
-  int64 tag = 1;
+  int64 id = 1;
   string name = 2;
   string color = 3;
   string user_id = 4;
@@ -38,7 +38,7 @@ message Group {
   int64 id = 1;
   string name = 2;
   repeated Task tasks = 3;
-  int32 task_count = 4;
+  int64 task_count = 4;
   int64 project_id = 5;
 }
 
@@ -47,7 +47,7 @@ message Project {
   string name = 2;
   string description = 3;
   repeated Group groups = 4;
-  int32 task_count = 5;
+  int64 task_count = 5;
   string user_id = 6;
 }
 
@@ -329,7 +329,7 @@ message GetProjectRequest {
 }
 
 message GetProjectResponse {
-  Project projects = 1;
+  Project project = 1;
 }
 
 message GetProjectsRequest {
