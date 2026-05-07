@@ -2578,8 +2578,6 @@ type CreateProjectRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Description   *string                `protobuf:"bytes,2,opt,name=description,proto3,oneof" json:"description,omitempty"`
-	Limit         uint64                 `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
-	Offset        uint64                 `protobuf:"varint,4,opt,name=offset,proto3" json:"offset,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2626,20 +2624,6 @@ func (x *CreateProjectRequest) GetDescription() string {
 		return *x.Description
 	}
 	return ""
-}
-
-func (x *CreateProjectRequest) GetLimit() uint64 {
-	if x != nil {
-		return x.Limit
-	}
-	return 0
-}
-
-func (x *CreateProjectRequest) GetOffset() uint64 {
-	if x != nil {
-		return x.Offset
-	}
-	return 0
 }
 
 type CreateProjectResponse struct {
@@ -2881,6 +2865,8 @@ func (x *DeleteProjectResponse) GetSuccess() bool {
 type GetProjectRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ProjectId     int64                  `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	Limit         uint64                 `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
+	Offset        uint64                 `protobuf:"varint,4,opt,name=offset,proto3" json:"offset,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2918,6 +2904,20 @@ func (*GetProjectRequest) Descriptor() ([]byte, []int) {
 func (x *GetProjectRequest) GetProjectId() int64 {
 	if x != nil {
 		return x.ProjectId
+	}
+	return 0
+}
+
+func (x *GetProjectRequest) GetLimit() uint64 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+func (x *GetProjectRequest) GetOffset() uint64 {
+	if x != nil {
+		return x.Offset
 	}
 	return 0
 }
@@ -3268,12 +3268,10 @@ const file_task_proto_rawDesc = "" +
 	"\x05limit\x18\x02 \x01(\x04R\x05limit\x12\x16\n" +
 	"\x06offset\x18\x03 \x01(\x04R\x06offset\"B\n" +
 	"\x18GetProjectGroupsResponse\x12&\n" +
-	"\x06groups\x18\x01 \x03(\v2\x0e.task_v1.GroupR\x06groups\"\x8f\x01\n" +
+	"\x06groups\x18\x01 \x03(\v2\x0e.task_v1.GroupR\x06groups\"a\n" +
 	"\x14CreateProjectRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12%\n" +
-	"\vdescription\x18\x02 \x01(\tH\x00R\vdescription\x88\x01\x01\x12\x14\n" +
-	"\x05limit\x18\x03 \x01(\x04R\x05limit\x12\x16\n" +
-	"\x06offset\x18\x04 \x01(\x04R\x06offsetB\x0e\n" +
+	"\vdescription\x18\x02 \x01(\tH\x00R\vdescription\x88\x01\x01B\x0e\n" +
 	"\f_description\"C\n" +
 	"\x15CreateProjectResponse\x12*\n" +
 	"\aproject\x18\x01 \x01(\v2\x10.task_v1.ProjectR\aproject\"\x7f\n" +
@@ -3288,10 +3286,12 @@ const file_task_proto_rawDesc = "" +
 	"\x14DeleteProjectRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"1\n" +
 	"\x15DeleteProjectResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"2\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"`\n" +
 	"\x11GetProjectRequest\x12\x1d\n" +
 	"\n" +
-	"project_id\x18\x01 \x01(\x03R\tprojectId\"B\n" +
+	"project_id\x18\x01 \x01(\x03R\tprojectId\x12\x14\n" +
+	"\x05limit\x18\x03 \x01(\x04R\x05limit\x12\x16\n" +
+	"\x06offset\x18\x04 \x01(\x04R\x06offset\"B\n" +
 	"\x12GetProjectResponse\x12,\n" +
 	"\bprojects\x18\x01 \x01(\v2\x10.task_v1.ProjectR\bprojects\"B\n" +
 	"\x12GetProjectsRequest\x12\x14\n" +
