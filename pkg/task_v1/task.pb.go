@@ -172,7 +172,7 @@ func (x *Task) GetIsArchived() bool {
 
 type Tag struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Tag           int64                  `protobuf:"varint,1,opt,name=tag,proto3" json:"tag,omitempty"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Color         string                 `protobuf:"bytes,3,opt,name=color,proto3" json:"color,omitempty"`
 	UserId        string                 `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -211,9 +211,9 @@ func (*Tag) Descriptor() ([]byte, []int) {
 	return file_task_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *Tag) GetTag() int64 {
+func (x *Tag) GetId() int64 {
 	if x != nil {
-		return x.Tag
+		return x.Id
 	}
 	return 0
 }
@@ -251,7 +251,7 @@ type Group struct {
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Tasks         []*Task                `protobuf:"bytes,3,rep,name=tasks,proto3" json:"tasks,omitempty"`
-	TaskCount     int32                  `protobuf:"varint,4,opt,name=task_count,json=taskCount,proto3" json:"task_count,omitempty"`
+	TaskCount     int64                  `protobuf:"varint,4,opt,name=task_count,json=taskCount,proto3" json:"task_count,omitempty"`
 	ProjectId     int64                  `protobuf:"varint,5,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -308,7 +308,7 @@ func (x *Group) GetTasks() []*Task {
 	return nil
 }
 
-func (x *Group) GetTaskCount() int32 {
+func (x *Group) GetTaskCount() int64 {
 	if x != nil {
 		return x.TaskCount
 	}
@@ -328,7 +328,7 @@ type Project struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	Groups        []*Group               `protobuf:"bytes,4,rep,name=groups,proto3" json:"groups,omitempty"`
-	TaskCount     int32                  `protobuf:"varint,5,opt,name=task_count,json=taskCount,proto3" json:"task_count,omitempty"`
+	TaskCount     int64                  `protobuf:"varint,5,opt,name=task_count,json=taskCount,proto3" json:"task_count,omitempty"`
 	UserId        string                 `protobuf:"bytes,6,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -392,7 +392,7 @@ func (x *Project) GetGroups() []*Group {
 	return nil
 }
 
-func (x *Project) GetTaskCount() int32 {
+func (x *Project) GetTaskCount() int64 {
 	if x != nil {
 		return x.TaskCount
 	}
@@ -2924,7 +2924,7 @@ func (x *GetProjectRequest) GetOffset() uint64 {
 
 type GetProjectResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Projects      *Project               `protobuf:"bytes,1,opt,name=projects,proto3" json:"projects,omitempty"`
+	Project       *Project               `protobuf:"bytes,1,opt,name=project,proto3" json:"project,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2959,9 +2959,9 @@ func (*GetProjectResponse) Descriptor() ([]byte, []int) {
 	return file_task_proto_rawDescGZIP(), []int{53}
 }
 
-func (x *GetProjectResponse) GetProjects() *Project {
+func (x *GetProjectResponse) GetProject() *Project {
 	if x != nil {
-		return x.Projects
+		return x.Project
 	}
 	return nil
 }
@@ -3093,9 +3093,9 @@ const file_task_proto_rawDesc = "" +
 	"\t_priorityB\t\n" +
 	"\a_statusB\v\n" +
 	"\t_group_idB\r\n" +
-	"\v_project_id\"y\n" +
-	"\x03Tag\x12\x10\n" +
-	"\x03tag\x18\x01 \x01(\x03R\x03tag\x12\x12\n" +
+	"\v_project_id\"w\n" +
+	"\x03Tag\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
 	"\x05color\x18\x03 \x01(\tR\x05color\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\tR\x06userId\x12\x1d\n" +
@@ -3106,7 +3106,7 @@ const file_task_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12#\n" +
 	"\x05tasks\x18\x03 \x03(\v2\r.task_v1.TaskR\x05tasks\x12\x1d\n" +
 	"\n" +
-	"task_count\x18\x04 \x01(\x05R\ttaskCount\x12\x1d\n" +
+	"task_count\x18\x04 \x01(\x03R\ttaskCount\x12\x1d\n" +
 	"\n" +
 	"project_id\x18\x05 \x01(\x03R\tprojectId\"\xaf\x01\n" +
 	"\aProject\x12\x0e\n" +
@@ -3115,7 +3115,7 @@ const file_task_proto_rawDesc = "" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12&\n" +
 	"\x06groups\x18\x04 \x03(\v2\x0e.task_v1.GroupR\x06groups\x12\x1d\n" +
 	"\n" +
-	"task_count\x18\x05 \x01(\x05R\ttaskCount\x12\x17\n" +
+	"task_count\x18\x05 \x01(\x03R\ttaskCount\x12\x17\n" +
 	"\auser_id\x18\x06 \x01(\tR\x06userId\"\xa0\x03\n" +
 	"\x11CreateTaskRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12%\n" +
@@ -3291,9 +3291,9 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"project_id\x18\x01 \x01(\x03R\tprojectId\x12\x14\n" +
 	"\x05limit\x18\x03 \x01(\x04R\x05limit\x12\x16\n" +
-	"\x06offset\x18\x04 \x01(\x04R\x06offset\"B\n" +
-	"\x12GetProjectResponse\x12,\n" +
-	"\bprojects\x18\x01 \x01(\v2\x10.task_v1.ProjectR\bprojects\"B\n" +
+	"\x06offset\x18\x04 \x01(\x04R\x06offset\"@\n" +
+	"\x12GetProjectResponse\x12*\n" +
+	"\aproject\x18\x01 \x01(\v2\x10.task_v1.ProjectR\aproject\"B\n" +
 	"\x12GetProjectsRequest\x12\x14\n" +
 	"\x05limit\x18\x01 \x01(\x04R\x05limit\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\"C\n" +
@@ -3435,7 +3435,7 @@ var file_task_proto_depIdxs = []int32{
 	2,  // 27: task_v1.GetProjectGroupsResponse.groups:type_name -> task_v1.Group
 	3,  // 28: task_v1.CreateProjectResponse.project:type_name -> task_v1.Project
 	3,  // 29: task_v1.UpdateProjectResponse.project:type_name -> task_v1.Project
-	3,  // 30: task_v1.GetProjectResponse.projects:type_name -> task_v1.Project
+	3,  // 30: task_v1.GetProjectResponse.project:type_name -> task_v1.Project
 	3,  // 31: task_v1.GetProjectsResponse.projects:type_name -> task_v1.Project
 	4,  // 32: task_v1.TaskService.CreateTask:input_type -> task_v1.CreateTaskRequest
 	6,  // 33: task_v1.TaskService.UpdateTask:input_type -> task_v1.UpdateTaskRequest
