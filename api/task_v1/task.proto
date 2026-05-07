@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package task_v1;
 
-option go_package = "bernard/task-service/pkg;task_v1";
-
 import "google/protobuf/timestamp.proto";
+
+option go_package = "bernard/task-service/pkg;task_v1";
 
 message Task {
   int64 task_id = 1;
@@ -17,12 +17,13 @@ message Task {
   google.protobuf.Timestamp start_time = 7;
   google.protobuf.Timestamp deadline = 8;
 
-  int64 group_id = 9;
-  string user_id = 10;
+  optional int64 group_id = 9;
+  optional int64 project_id = 10;
+  string user_id = 11;
 
-  google.protobuf.Timestamp created_at = 11;
-  google.protobuf.Timestamp updated_at = 12;
-  bool is_archived = 13;
+  google.protobuf.Timestamp created_at = 12;
+  google.protobuf.Timestamp updated_at = 13;
+  bool is_archived = 14;
 }
 
 message Tag {
@@ -30,6 +31,7 @@ message Tag {
   string name = 2;
   string color = 3;
   string user_id = 4;
+  int64 project_id = 5;
 }
 
 message Group {
@@ -50,32 +52,37 @@ message Project {
 }
 
 service TaskService {
-  rpc CreateTask (CreateTaskRequest) returns (CreateTaskResponse);
-  rpc UpdateTask (UpdateTaskRequest) returns (UpdateTaskResponse);
-  rpc DeleteTask (DeleteTaskRequest) returns (DeleteTaskResponse);
-  rpc GetTask (GetTaskRequest) returns (GetTaskResponse);
-  rpc GetListTask (GetListTasksRequest) returns (GetListTasksResponse);
+  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
+  rpc UpdateTask(UpdateTaskRequest) returns (UpdateTaskResponse);
+  rpc DeleteTask(DeleteTaskRequest) returns (DeleteTaskResponse);
+  rpc GetTask(GetTaskRequest) returns (GetTaskResponse);
+  rpc GetListTask(GetListTaskRequest) returns (GetListTaskResponse);
+  rpc GetGroupTasks(GetGroupTasksRequest) returns (GetGroupTasksResponse);
 
-  rpc ArchiveTask (ArchiveTaskRequest) returns (ArchiveTaskResponse);
+  rpc ArchiveTask(ArchiveTaskRequest) returns (ArchiveTaskResponse);
 
-  rpc CreateTag (CreateTagRequest) returns (CreateTagResponse);
-  rpc UpdateTag (UpdateTagRequest) returns (UpdateTagResponse);
-  rpc DeleteTag (DeleteTagRequest) returns (DeleteTagResponse);
-  rpc GetTag (GetTagRequest) returns (GetTagResponse);
-  rpc GetTagList (GetTagListRequest) returns (GetTagListResponse);
+  rpc CreateTag(CreateTagRequest) returns (CreateTagResponse);
+  rpc UpdateTag(UpdateTagRequest) returns (UpdateTagResponse);
+  rpc DeleteTag(DeleteTagRequest) returns (DeleteTagResponse);
+  rpc GetTag(GetTagRequest) returns (GetTagResponse);
+  rpc GetTagList(GetTagListRequest) returns (GetTagListResponse);
+  rpc GetTaskTags(GetTaskTagsRequest) returns (GetTaskTagsResponse);
 
-  rpc AddTagToTask (AddTagToTaskRequest) returns (AddTagToTaskResponse);
-  rpc RemoveTagFromTask (RemoveTagFromTaskRequest) returns (RemoveTagFromTaskResponse);
+  rpc AddTagsToTask(AddTagsToTaskRequest) returns (AddTagsToTaskResponse);
+  rpc RemoveTagsFromTask(RemoveTagsFromTaskRequest) returns (RemoveTagsFromTaskResponse);
+  rpc RemoveAllTagsFromTask(RemoveAllTagsFromTaskRequest) returns (RemoveAllTagsFromTaskResponse);
 
-  rpc CreateGroup (CreateGroupRequest) returns (CreateGroupResponse);
-  rpc UpdateGroup (UpdateGroupRequest) returns (UpdateGroupResponse);
-  rpc DeleteGroup (DeleteGroupRequest) returns (DeleteGroupResponse);
+  rpc CreateGroup(CreateGroupRequest) returns (CreateGroupResponse);
+  rpc UpdateGroup(UpdateGroupRequest) returns (UpdateGroupResponse);
+  rpc DeleteGroup(DeleteGroupRequest) returns (DeleteGroupResponse);
+  rpc GetGroup(GetGroupRequest) returns (GetGroupResponse);
+  rpc GetProjectGroups(GetProjectGroupsRequest) returns (GetProjectGroupsResponse);
 
-  rpc CreateProject (CreateProjectRequest) returns (CreateProjectResponse);
-  rpc UpdateProject (UpdateProjectRequest) returns (UpdateProjectResponse);
-  rpc DeleteProject (DeleteProjectRequest) returns (DeleteProjectResponse);
-  rpc GetProjects (GetProjectsRequest) returns (GetProjectsResponse);
-  rpc GetProjectTree (GetProjectTreeRequest) returns (GetProjectTreeResponse);
+  rpc CreateProject(CreateProjectRequest) returns (CreateProjectResponse);
+  rpc UpdateProject(UpdateProjectRequest) returns (UpdateProjectResponse);
+  rpc DeleteProject(DeleteProjectRequest) returns (DeleteProjectResponse);
+  rpc GetProjects(GetProjectsRequest) returns (GetProjectsResponse);
+  rpc GetProject(GetProjectRequest) returns (GetProjectResponse);
 }
 
 message CreateTaskRequest {
@@ -84,10 +91,11 @@ message CreateTaskRequest {
   repeated int64 tag_ids = 3;
   optional int32 priority = 4;
   optional string status = 5;
-  int64 group_id = 6;
+  optional int64 group_id = 6;
+  optional int64 project_id = 7;
 
-  google.protobuf.Timestamp start_time = 7;
-  google.protobuf.Timestamp deadline = 8;
+  google.protobuf.Timestamp start_time = 8;
+  google.protobuf.Timestamp deadline = 9;
 }
 
 message CreateTaskResponse {
@@ -102,9 +110,10 @@ message UpdateTaskRequest {
   optional int32 priority = 5;
   optional string status = 6;
   optional int64 group_id = 7;
+  optional int64 porject_id = 8;
 
-  google.protobuf.Timestamp start_time = 8;
-  google.protobuf.Timestamp deadline = 9;
+  google.protobuf.Timestamp start_time = 9;
+  google.protobuf.Timestamp deadline = 10;
 }
 
 message UpdateTaskResponse {
@@ -127,7 +136,7 @@ message GetTaskResponse {
   Task task = 1;
 }
 
-message GetListTasksRequest {
+message GetListTaskRequest {
   optional int32 priority = 1;
   optional int64 tag_ids = 2;
   google.protobuf.Timestamp from = 3;
@@ -136,16 +145,19 @@ message GetListTasksRequest {
   uint64 offset = 6;
 }
 
-message TasksTab {
-  Task task = 1;
-  int64 total_count = 2;
-  string group_name = 3;
-  int64 project_id = 4;
-  string project_name = 5;
+message GetListTaskResponse {
+  repeated Task tasks = 1;
 }
 
-message GetListTasksResponse {
-  repeated TasksTab tasks = 1;
+message GetGroupTasksRequest {
+  int64 group_id = 1;
+  string user_id = 2;
+  uint64 limit = 3;
+  uint64 offset = 5;
+}
+
+message GetGroupTasksResponse {
+  repeated Task tasks = 1;
 }
 
 message ArchiveTaskRequest {
@@ -159,6 +171,7 @@ message ArchiveTaskResponse {
 message CreateTagRequest {
   string name = 1;
   string color = 2;
+  int64 project_id = 3;
 }
 
 message CreateTagResponse {
@@ -192,30 +205,47 @@ message GetTagResponse {
 }
 
 message GetTagListRequest {
-  uint64 limit = 1;
-  uint64 offset = 2;
+  int64 project_id = 1;
+  uint64 limit = 2;
+  uint64 offset = 3;
 }
 
 message GetTagListResponse {
   repeated Tag tags = 1;
 }
 
-message AddTagToTaskRequest {
+message GetTaskTagsRequest {
+    int64 task_id = 1;
+}
+
+message GetTaskTagsResponse {
+    repeated Tag tags = 1;
+}
+
+message AddTagsToTaskRequest {
   int64 task_id = 1;
-  int64 tag_id = 2;
+  repeated int64 tags_ids = 2;
 }
 
-message AddTagToTaskResponse {
-  bool success = 1;
+message AddTagsToTaskResponse {
+    bool succes = 1;
 }
 
-message RemoveTagFromTaskRequest {
-  int64 task_id = 1;
-  int64 tag_id = 2;
+message RemoveTagsFromTaskRequest {
+    int64 task_id = 1;
+    repeated int64 tags_ids = 2;
 }
 
-message RemoveTagFromTaskResponse {
-  bool success = 1;
+message RemoveTagsFromTaskResponse {
+    bool success = 1;
+}
+
+message RemoveAllTagsFromTaskRequest {
+    int64 task_id = 1;
+}
+
+message RemoveAllTagsFromTaskResponse {
+    bool success = 1;
 }
 
 message CreateGroupRequest {
@@ -245,9 +275,27 @@ message DeleteGroupResponse {
   bool success = 1;
 }
 
+message GetGroupRequest {
+    int64 group_id = 1;
+}
+
+message GetGroupResponse {
+    Group group = 1;
+}
+
+message GetProjectGroupsRequest {
+    int64 project_id = 1;
+    uint64 limit = 2;
+    uint64 offset = 3;
+}
+
+message GetProjectGroupsResponse {
+    repeated Group groups = 1;
+}
+
 message CreateProjectRequest {
-  string name = 2;
-  optional string description = 3;
+  string name = 1;
+  optional string description = 2;
 }
 
 message CreateProjectResponse {
@@ -272,19 +320,19 @@ message DeleteProjectResponse {
   bool success = 1;
 }
 
+message GetProjectRequest {
+    int64 project_id = 1;
+}
+
+message GetProjectResponse {
+  Project projects = 1;
+}
+
 message GetProjectsRequest {
-  uint64 limit = 1;
-  uint64 offset = 2;
+    uint64 limit = 1;
+    uint64 offset = 2;
 }
 
 message GetProjectsResponse {
-  repeated Project projects = 1;
-}
-
-message GetProjectTreeRequest {
-  int64 id = 1;
-}
-
-message GetProjectTreeResponse {
-  Project project = 1;
+    repeated Project projects = 1;
 }

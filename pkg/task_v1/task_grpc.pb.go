@@ -19,27 +19,32 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TaskService_CreateTask_FullMethodName        = "/task_v1.TaskService/CreateTask"
-	TaskService_UpdateTask_FullMethodName        = "/task_v1.TaskService/UpdateTask"
-	TaskService_DeleteTask_FullMethodName        = "/task_v1.TaskService/DeleteTask"
-	TaskService_GetTask_FullMethodName           = "/task_v1.TaskService/GetTask"
-	TaskService_GetListTask_FullMethodName       = "/task_v1.TaskService/GetListTask"
-	TaskService_ArchiveTask_FullMethodName       = "/task_v1.TaskService/ArchiveTask"
-	TaskService_CreateTag_FullMethodName         = "/task_v1.TaskService/CreateTag"
-	TaskService_UpdateTag_FullMethodName         = "/task_v1.TaskService/UpdateTag"
-	TaskService_DeleteTag_FullMethodName         = "/task_v1.TaskService/DeleteTag"
-	TaskService_GetTag_FullMethodName            = "/task_v1.TaskService/GetTag"
-	TaskService_GetTagList_FullMethodName        = "/task_v1.TaskService/GetTagList"
-	TaskService_AddTagToTask_FullMethodName      = "/task_v1.TaskService/AddTagToTask"
-	TaskService_RemoveTagFromTask_FullMethodName = "/task_v1.TaskService/RemoveTagFromTask"
-	TaskService_CreateGroup_FullMethodName       = "/task_v1.TaskService/CreateGroup"
-	TaskService_UpdateGroup_FullMethodName       = "/task_v1.TaskService/UpdateGroup"
-	TaskService_DeleteGroup_FullMethodName       = "/task_v1.TaskService/DeleteGroup"
-	TaskService_CreateProject_FullMethodName     = "/task_v1.TaskService/CreateProject"
-	TaskService_UpdateProject_FullMethodName     = "/task_v1.TaskService/UpdateProject"
-	TaskService_DeleteProject_FullMethodName     = "/task_v1.TaskService/DeleteProject"
-	TaskService_GetProjects_FullMethodName       = "/task_v1.TaskService/GetProjects"
-	TaskService_GetProjectTree_FullMethodName    = "/task_v1.TaskService/GetProjectTree"
+	TaskService_CreateTask_FullMethodName            = "/task_v1.TaskService/CreateTask"
+	TaskService_UpdateTask_FullMethodName            = "/task_v1.TaskService/UpdateTask"
+	TaskService_DeleteTask_FullMethodName            = "/task_v1.TaskService/DeleteTask"
+	TaskService_GetTask_FullMethodName               = "/task_v1.TaskService/GetTask"
+	TaskService_GetListTask_FullMethodName           = "/task_v1.TaskService/GetListTask"
+	TaskService_GetGroupTasks_FullMethodName         = "/task_v1.TaskService/GetGroupTasks"
+	TaskService_ArchiveTask_FullMethodName           = "/task_v1.TaskService/ArchiveTask"
+	TaskService_CreateTag_FullMethodName             = "/task_v1.TaskService/CreateTag"
+	TaskService_UpdateTag_FullMethodName             = "/task_v1.TaskService/UpdateTag"
+	TaskService_DeleteTag_FullMethodName             = "/task_v1.TaskService/DeleteTag"
+	TaskService_GetTag_FullMethodName                = "/task_v1.TaskService/GetTag"
+	TaskService_GetTagList_FullMethodName            = "/task_v1.TaskService/GetTagList"
+	TaskService_GetTaskTags_FullMethodName           = "/task_v1.TaskService/GetTaskTags"
+	TaskService_AddTagsToTask_FullMethodName         = "/task_v1.TaskService/AddTagsToTask"
+	TaskService_RemoveTagsFromTask_FullMethodName    = "/task_v1.TaskService/RemoveTagsFromTask"
+	TaskService_RemoveAllTagsFromTask_FullMethodName = "/task_v1.TaskService/RemoveAllTagsFromTask"
+	TaskService_CreateGroup_FullMethodName           = "/task_v1.TaskService/CreateGroup"
+	TaskService_UpdateGroup_FullMethodName           = "/task_v1.TaskService/UpdateGroup"
+	TaskService_DeleteGroup_FullMethodName           = "/task_v1.TaskService/DeleteGroup"
+	TaskService_GetGroup_FullMethodName              = "/task_v1.TaskService/GetGroup"
+	TaskService_GetProjectGroups_FullMethodName      = "/task_v1.TaskService/GetProjectGroups"
+	TaskService_CreateProject_FullMethodName         = "/task_v1.TaskService/CreateProject"
+	TaskService_UpdateProject_FullMethodName         = "/task_v1.TaskService/UpdateProject"
+	TaskService_DeleteProject_FullMethodName         = "/task_v1.TaskService/DeleteProject"
+	TaskService_GetProjects_FullMethodName           = "/task_v1.TaskService/GetProjects"
+	TaskService_GetProject_FullMethodName            = "/task_v1.TaskService/GetProject"
 )
 
 // TaskServiceClient is the client API for TaskService service.
@@ -50,23 +55,28 @@ type TaskServiceClient interface {
 	UpdateTask(ctx context.Context, in *UpdateTaskRequest, opts ...grpc.CallOption) (*UpdateTaskResponse, error)
 	DeleteTask(ctx context.Context, in *DeleteTaskRequest, opts ...grpc.CallOption) (*DeleteTaskResponse, error)
 	GetTask(ctx context.Context, in *GetTaskRequest, opts ...grpc.CallOption) (*GetTaskResponse, error)
-	GetListTask(ctx context.Context, in *GetListTasksRequest, opts ...grpc.CallOption) (*GetListTasksResponse, error)
+	GetListTask(ctx context.Context, in *GetListTaskRequest, opts ...grpc.CallOption) (*GetListTaskResponse, error)
+	GetGroupTasks(ctx context.Context, in *GetGroupTasksRequest, opts ...grpc.CallOption) (*GetGroupTasksResponse, error)
 	ArchiveTask(ctx context.Context, in *ArchiveTaskRequest, opts ...grpc.CallOption) (*ArchiveTaskResponse, error)
 	CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*CreateTagResponse, error)
 	UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*UpdateTagResponse, error)
 	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error)
 	GetTag(ctx context.Context, in *GetTagRequest, opts ...grpc.CallOption) (*GetTagResponse, error)
 	GetTagList(ctx context.Context, in *GetTagListRequest, opts ...grpc.CallOption) (*GetTagListResponse, error)
-	AddTagToTask(ctx context.Context, in *AddTagToTaskRequest, opts ...grpc.CallOption) (*AddTagToTaskResponse, error)
-	RemoveTagFromTask(ctx context.Context, in *RemoveTagFromTaskRequest, opts ...grpc.CallOption) (*RemoveTagFromTaskResponse, error)
+	GetTaskTags(ctx context.Context, in *GetTaskTagsRequest, opts ...grpc.CallOption) (*GetTaskTagsResponse, error)
+	AddTagsToTask(ctx context.Context, in *AddTagsToTaskRequest, opts ...grpc.CallOption) (*AddTagsToTaskResponse, error)
+	RemoveTagsFromTask(ctx context.Context, in *RemoveTagsFromTaskRequest, opts ...grpc.CallOption) (*RemoveTagsFromTaskResponse, error)
+	RemoveAllTagsFromTask(ctx context.Context, in *RemoveAllTagsFromTaskRequest, opts ...grpc.CallOption) (*RemoveAllTagsFromTaskResponse, error)
 	CreateGroup(ctx context.Context, in *CreateGroupRequest, opts ...grpc.CallOption) (*CreateGroupResponse, error)
 	UpdateGroup(ctx context.Context, in *UpdateGroupRequest, opts ...grpc.CallOption) (*UpdateGroupResponse, error)
 	DeleteGroup(ctx context.Context, in *DeleteGroupRequest, opts ...grpc.CallOption) (*DeleteGroupResponse, error)
+	GetGroup(ctx context.Context, in *GetGroupRequest, opts ...grpc.CallOption) (*GetGroupResponse, error)
+	GetProjectGroups(ctx context.Context, in *GetProjectGroupsRequest, opts ...grpc.CallOption) (*GetProjectGroupsResponse, error)
 	CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*CreateProjectResponse, error)
 	UpdateProject(ctx context.Context, in *UpdateProjectRequest, opts ...grpc.CallOption) (*UpdateProjectResponse, error)
 	DeleteProject(ctx context.Context, in *DeleteProjectRequest, opts ...grpc.CallOption) (*DeleteProjectResponse, error)
 	GetProjects(ctx context.Context, in *GetProjectsRequest, opts ...grpc.CallOption) (*GetProjectsResponse, error)
-	GetProjectTree(ctx context.Context, in *GetProjectTreeRequest, opts ...grpc.CallOption) (*GetProjectTreeResponse, error)
+	GetProject(ctx context.Context, in *GetProjectRequest, opts ...grpc.CallOption) (*GetProjectResponse, error)
 }
 
 type taskServiceClient struct {
@@ -117,10 +127,20 @@ func (c *taskServiceClient) GetTask(ctx context.Context, in *GetTaskRequest, opt
 	return out, nil
 }
 
-func (c *taskServiceClient) GetListTask(ctx context.Context, in *GetListTasksRequest, opts ...grpc.CallOption) (*GetListTasksResponse, error) {
+func (c *taskServiceClient) GetListTask(ctx context.Context, in *GetListTaskRequest, opts ...grpc.CallOption) (*GetListTaskResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetListTasksResponse)
+	out := new(GetListTaskResponse)
 	err := c.cc.Invoke(ctx, TaskService_GetListTask_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) GetGroupTasks(ctx context.Context, in *GetGroupTasksRequest, opts ...grpc.CallOption) (*GetGroupTasksResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGroupTasksResponse)
+	err := c.cc.Invoke(ctx, TaskService_GetGroupTasks_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -187,20 +207,40 @@ func (c *taskServiceClient) GetTagList(ctx context.Context, in *GetTagListReques
 	return out, nil
 }
 
-func (c *taskServiceClient) AddTagToTask(ctx context.Context, in *AddTagToTaskRequest, opts ...grpc.CallOption) (*AddTagToTaskResponse, error) {
+func (c *taskServiceClient) GetTaskTags(ctx context.Context, in *GetTaskTagsRequest, opts ...grpc.CallOption) (*GetTaskTagsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddTagToTaskResponse)
-	err := c.cc.Invoke(ctx, TaskService_AddTagToTask_FullMethodName, in, out, cOpts...)
+	out := new(GetTaskTagsResponse)
+	err := c.cc.Invoke(ctx, TaskService_GetTaskTags_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *taskServiceClient) RemoveTagFromTask(ctx context.Context, in *RemoveTagFromTaskRequest, opts ...grpc.CallOption) (*RemoveTagFromTaskResponse, error) {
+func (c *taskServiceClient) AddTagsToTask(ctx context.Context, in *AddTagsToTaskRequest, opts ...grpc.CallOption) (*AddTagsToTaskResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RemoveTagFromTaskResponse)
-	err := c.cc.Invoke(ctx, TaskService_RemoveTagFromTask_FullMethodName, in, out, cOpts...)
+	out := new(AddTagsToTaskResponse)
+	err := c.cc.Invoke(ctx, TaskService_AddTagsToTask_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) RemoveTagsFromTask(ctx context.Context, in *RemoveTagsFromTaskRequest, opts ...grpc.CallOption) (*RemoveTagsFromTaskResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveTagsFromTaskResponse)
+	err := c.cc.Invoke(ctx, TaskService_RemoveTagsFromTask_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) RemoveAllTagsFromTask(ctx context.Context, in *RemoveAllTagsFromTaskRequest, opts ...grpc.CallOption) (*RemoveAllTagsFromTaskResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveAllTagsFromTaskResponse)
+	err := c.cc.Invoke(ctx, TaskService_RemoveAllTagsFromTask_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -231,6 +271,26 @@ func (c *taskServiceClient) DeleteGroup(ctx context.Context, in *DeleteGroupRequ
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteGroupResponse)
 	err := c.cc.Invoke(ctx, TaskService_DeleteGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) GetGroup(ctx context.Context, in *GetGroupRequest, opts ...grpc.CallOption) (*GetGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGroupResponse)
+	err := c.cc.Invoke(ctx, TaskService_GetGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) GetProjectGroups(ctx context.Context, in *GetProjectGroupsRequest, opts ...grpc.CallOption) (*GetProjectGroupsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProjectGroupsResponse)
+	err := c.cc.Invoke(ctx, TaskService_GetProjectGroups_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -277,10 +337,10 @@ func (c *taskServiceClient) GetProjects(ctx context.Context, in *GetProjectsRequ
 	return out, nil
 }
 
-func (c *taskServiceClient) GetProjectTree(ctx context.Context, in *GetProjectTreeRequest, opts ...grpc.CallOption) (*GetProjectTreeResponse, error) {
+func (c *taskServiceClient) GetProject(ctx context.Context, in *GetProjectRequest, opts ...grpc.CallOption) (*GetProjectResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetProjectTreeResponse)
-	err := c.cc.Invoke(ctx, TaskService_GetProjectTree_FullMethodName, in, out, cOpts...)
+	out := new(GetProjectResponse)
+	err := c.cc.Invoke(ctx, TaskService_GetProject_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -295,23 +355,28 @@ type TaskServiceServer interface {
 	UpdateTask(context.Context, *UpdateTaskRequest) (*UpdateTaskResponse, error)
 	DeleteTask(context.Context, *DeleteTaskRequest) (*DeleteTaskResponse, error)
 	GetTask(context.Context, *GetTaskRequest) (*GetTaskResponse, error)
-	GetListTask(context.Context, *GetListTasksRequest) (*GetListTasksResponse, error)
+	GetListTask(context.Context, *GetListTaskRequest) (*GetListTaskResponse, error)
+	GetGroupTasks(context.Context, *GetGroupTasksRequest) (*GetGroupTasksResponse, error)
 	ArchiveTask(context.Context, *ArchiveTaskRequest) (*ArchiveTaskResponse, error)
 	CreateTag(context.Context, *CreateTagRequest) (*CreateTagResponse, error)
 	UpdateTag(context.Context, *UpdateTagRequest) (*UpdateTagResponse, error)
 	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error)
 	GetTag(context.Context, *GetTagRequest) (*GetTagResponse, error)
 	GetTagList(context.Context, *GetTagListRequest) (*GetTagListResponse, error)
-	AddTagToTask(context.Context, *AddTagToTaskRequest) (*AddTagToTaskResponse, error)
-	RemoveTagFromTask(context.Context, *RemoveTagFromTaskRequest) (*RemoveTagFromTaskResponse, error)
+	GetTaskTags(context.Context, *GetTaskTagsRequest) (*GetTaskTagsResponse, error)
+	AddTagsToTask(context.Context, *AddTagsToTaskRequest) (*AddTagsToTaskResponse, error)
+	RemoveTagsFromTask(context.Context, *RemoveTagsFromTaskRequest) (*RemoveTagsFromTaskResponse, error)
+	RemoveAllTagsFromTask(context.Context, *RemoveAllTagsFromTaskRequest) (*RemoveAllTagsFromTaskResponse, error)
 	CreateGroup(context.Context, *CreateGroupRequest) (*CreateGroupResponse, error)
 	UpdateGroup(context.Context, *UpdateGroupRequest) (*UpdateGroupResponse, error)
 	DeleteGroup(context.Context, *DeleteGroupRequest) (*DeleteGroupResponse, error)
+	GetGroup(context.Context, *GetGroupRequest) (*GetGroupResponse, error)
+	GetProjectGroups(context.Context, *GetProjectGroupsRequest) (*GetProjectGroupsResponse, error)
 	CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error)
 	UpdateProject(context.Context, *UpdateProjectRequest) (*UpdateProjectResponse, error)
 	DeleteProject(context.Context, *DeleteProjectRequest) (*DeleteProjectResponse, error)
 	GetProjects(context.Context, *GetProjectsRequest) (*GetProjectsResponse, error)
-	GetProjectTree(context.Context, *GetProjectTreeRequest) (*GetProjectTreeResponse, error)
+	GetProject(context.Context, *GetProjectRequest) (*GetProjectResponse, error)
 	mustEmbedUnimplementedTaskServiceServer()
 }
 
@@ -334,8 +399,11 @@ func (UnimplementedTaskServiceServer) DeleteTask(context.Context, *DeleteTaskReq
 func (UnimplementedTaskServiceServer) GetTask(context.Context, *GetTaskRequest) (*GetTaskResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetTask not implemented")
 }
-func (UnimplementedTaskServiceServer) GetListTask(context.Context, *GetListTasksRequest) (*GetListTasksResponse, error) {
+func (UnimplementedTaskServiceServer) GetListTask(context.Context, *GetListTaskRequest) (*GetListTaskResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetListTask not implemented")
+}
+func (UnimplementedTaskServiceServer) GetGroupTasks(context.Context, *GetGroupTasksRequest) (*GetGroupTasksResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGroupTasks not implemented")
 }
 func (UnimplementedTaskServiceServer) ArchiveTask(context.Context, *ArchiveTaskRequest) (*ArchiveTaskResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ArchiveTask not implemented")
@@ -355,11 +423,17 @@ func (UnimplementedTaskServiceServer) GetTag(context.Context, *GetTagRequest) (*
 func (UnimplementedTaskServiceServer) GetTagList(context.Context, *GetTagListRequest) (*GetTagListResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetTagList not implemented")
 }
-func (UnimplementedTaskServiceServer) AddTagToTask(context.Context, *AddTagToTaskRequest) (*AddTagToTaskResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddTagToTask not implemented")
+func (UnimplementedTaskServiceServer) GetTaskTags(context.Context, *GetTaskTagsRequest) (*GetTaskTagsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetTaskTags not implemented")
 }
-func (UnimplementedTaskServiceServer) RemoveTagFromTask(context.Context, *RemoveTagFromTaskRequest) (*RemoveTagFromTaskResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RemoveTagFromTask not implemented")
+func (UnimplementedTaskServiceServer) AddTagsToTask(context.Context, *AddTagsToTaskRequest) (*AddTagsToTaskResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddTagsToTask not implemented")
+}
+func (UnimplementedTaskServiceServer) RemoveTagsFromTask(context.Context, *RemoveTagsFromTaskRequest) (*RemoveTagsFromTaskResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveTagsFromTask not implemented")
+}
+func (UnimplementedTaskServiceServer) RemoveAllTagsFromTask(context.Context, *RemoveAllTagsFromTaskRequest) (*RemoveAllTagsFromTaskResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveAllTagsFromTask not implemented")
 }
 func (UnimplementedTaskServiceServer) CreateGroup(context.Context, *CreateGroupRequest) (*CreateGroupResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateGroup not implemented")
@@ -369,6 +443,12 @@ func (UnimplementedTaskServiceServer) UpdateGroup(context.Context, *UpdateGroupR
 }
 func (UnimplementedTaskServiceServer) DeleteGroup(context.Context, *DeleteGroupRequest) (*DeleteGroupResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteGroup not implemented")
+}
+func (UnimplementedTaskServiceServer) GetGroup(context.Context, *GetGroupRequest) (*GetGroupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGroup not implemented")
+}
+func (UnimplementedTaskServiceServer) GetProjectGroups(context.Context, *GetProjectGroupsRequest) (*GetProjectGroupsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetProjectGroups not implemented")
 }
 func (UnimplementedTaskServiceServer) CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateProject not implemented")
@@ -382,8 +462,8 @@ func (UnimplementedTaskServiceServer) DeleteProject(context.Context, *DeleteProj
 func (UnimplementedTaskServiceServer) GetProjects(context.Context, *GetProjectsRequest) (*GetProjectsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetProjects not implemented")
 }
-func (UnimplementedTaskServiceServer) GetProjectTree(context.Context, *GetProjectTreeRequest) (*GetProjectTreeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetProjectTree not implemented")
+func (UnimplementedTaskServiceServer) GetProject(context.Context, *GetProjectRequest) (*GetProjectResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetProject not implemented")
 }
 func (UnimplementedTaskServiceServer) mustEmbedUnimplementedTaskServiceServer() {}
 func (UnimplementedTaskServiceServer) testEmbeddedByValue()                     {}
@@ -479,7 +559,7 @@ func _TaskService_GetTask_Handler(srv interface{}, ctx context.Context, dec func
 }
 
 func _TaskService_GetListTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetListTasksRequest)
+	in := new(GetListTaskRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -491,7 +571,25 @@ func _TaskService_GetListTask_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: TaskService_GetListTask_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskServiceServer).GetListTask(ctx, req.(*GetListTasksRequest))
+		return srv.(TaskServiceServer).GetListTask(ctx, req.(*GetListTaskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_GetGroupTasks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGroupTasksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).GetGroupTasks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_GetGroupTasks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).GetGroupTasks(ctx, req.(*GetGroupTasksRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -604,38 +702,74 @@ func _TaskService_GetTagList_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TaskService_AddTagToTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddTagToTaskRequest)
+func _TaskService_GetTaskTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTaskTagsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskServiceServer).AddTagToTask(ctx, in)
+		return srv.(TaskServiceServer).GetTaskTags(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TaskService_AddTagToTask_FullMethodName,
+		FullMethod: TaskService_GetTaskTags_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskServiceServer).AddTagToTask(ctx, req.(*AddTagToTaskRequest))
+		return srv.(TaskServiceServer).GetTaskTags(ctx, req.(*GetTaskTagsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TaskService_RemoveTagFromTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoveTagFromTaskRequest)
+func _TaskService_AddTagsToTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddTagsToTaskRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskServiceServer).RemoveTagFromTask(ctx, in)
+		return srv.(TaskServiceServer).AddTagsToTask(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TaskService_RemoveTagFromTask_FullMethodName,
+		FullMethod: TaskService_AddTagsToTask_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskServiceServer).RemoveTagFromTask(ctx, req.(*RemoveTagFromTaskRequest))
+		return srv.(TaskServiceServer).AddTagsToTask(ctx, req.(*AddTagsToTaskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_RemoveTagsFromTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveTagsFromTaskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).RemoveTagsFromTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_RemoveTagsFromTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).RemoveTagsFromTask(ctx, req.(*RemoveTagsFromTaskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_RemoveAllTagsFromTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveAllTagsFromTaskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).RemoveAllTagsFromTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_RemoveAllTagsFromTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).RemoveAllTagsFromTask(ctx, req.(*RemoveAllTagsFromTaskRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -690,6 +824,42 @@ func _TaskService_DeleteGroup_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TaskServiceServer).DeleteGroup(ctx, req.(*DeleteGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_GetGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).GetGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_GetGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).GetGroup(ctx, req.(*GetGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_GetProjectGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProjectGroupsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).GetProjectGroups(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_GetProjectGroups_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).GetProjectGroups(ctx, req.(*GetProjectGroupsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -766,20 +936,20 @@ func _TaskService_GetProjects_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TaskService_GetProjectTree_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetProjectTreeRequest)
+func _TaskService_GetProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProjectRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskServiceServer).GetProjectTree(ctx, in)
+		return srv.(TaskServiceServer).GetProject(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TaskService_GetProjectTree_FullMethodName,
+		FullMethod: TaskService_GetProject_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskServiceServer).GetProjectTree(ctx, req.(*GetProjectTreeRequest))
+		return srv.(TaskServiceServer).GetProject(ctx, req.(*GetProjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -812,6 +982,10 @@ var TaskService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TaskService_GetListTask_Handler,
 		},
 		{
+			MethodName: "GetGroupTasks",
+			Handler:    _TaskService_GetGroupTasks_Handler,
+		},
+		{
 			MethodName: "ArchiveTask",
 			Handler:    _TaskService_ArchiveTask_Handler,
 		},
@@ -836,12 +1010,20 @@ var TaskService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TaskService_GetTagList_Handler,
 		},
 		{
-			MethodName: "AddTagToTask",
-			Handler:    _TaskService_AddTagToTask_Handler,
+			MethodName: "GetTaskTags",
+			Handler:    _TaskService_GetTaskTags_Handler,
 		},
 		{
-			MethodName: "RemoveTagFromTask",
-			Handler:    _TaskService_RemoveTagFromTask_Handler,
+			MethodName: "AddTagsToTask",
+			Handler:    _TaskService_AddTagsToTask_Handler,
+		},
+		{
+			MethodName: "RemoveTagsFromTask",
+			Handler:    _TaskService_RemoveTagsFromTask_Handler,
+		},
+		{
+			MethodName: "RemoveAllTagsFromTask",
+			Handler:    _TaskService_RemoveAllTagsFromTask_Handler,
 		},
 		{
 			MethodName: "CreateGroup",
@@ -854,6 +1036,14 @@ var TaskService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteGroup",
 			Handler:    _TaskService_DeleteGroup_Handler,
+		},
+		{
+			MethodName: "GetGroup",
+			Handler:    _TaskService_GetGroup_Handler,
+		},
+		{
+			MethodName: "GetProjectGroups",
+			Handler:    _TaskService_GetProjectGroups_Handler,
 		},
 		{
 			MethodName: "CreateProject",
@@ -872,8 +1062,8 @@ var TaskService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TaskService_GetProjects_Handler,
 		},
 		{
-			MethodName: "GetProjectTree",
-			Handler:    _TaskService_GetProjectTree_Handler,
+			MethodName: "GetProject",
+			Handler:    _TaskService_GetProject_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
