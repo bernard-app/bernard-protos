@@ -45,7 +45,7 @@ message Group {
 message Project {
   int64 id = 1;
   string name = 2;
-  string description = 3;
+  optional string description = 3;
   repeated Group groups = 4;
   int64 task_count = 5;
   string user_id = 6;

@@ -326,7 +326,7 @@ type Project struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Description   *string                `protobuf:"bytes,3,opt,name=description,proto3,oneof" json:"description,omitempty"`
 	Groups        []*Group               `protobuf:"bytes,4,rep,name=groups,proto3" json:"groups,omitempty"`
 	TaskCount     int64                  `protobuf:"varint,5,opt,name=task_count,json=taskCount,proto3" json:"task_count,omitempty"`
 	UserId        string                 `protobuf:"bytes,6,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -379,8 +379,8 @@ func (x *Project) GetName() string {
 }
 
 func (x *Project) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
@@ -3108,15 +3108,16 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"task_count\x18\x04 \x01(\x03R\ttaskCount\x12\x1d\n" +
 	"\n" +
-	"project_id\x18\x05 \x01(\x03R\tprojectId\"\xaf\x01\n" +
+	"project_id\x18\x05 \x01(\x03R\tprojectId\"\xc4\x01\n" +
 	"\aProject\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12&\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12%\n" +
+	"\vdescription\x18\x03 \x01(\tH\x00R\vdescription\x88\x01\x01\x12&\n" +
 	"\x06groups\x18\x04 \x03(\v2\x0e.task_v1.GroupR\x06groups\x12\x1d\n" +
 	"\n" +
 	"task_count\x18\x05 \x01(\x03R\ttaskCount\x12\x17\n" +
-	"\auser_id\x18\x06 \x01(\tR\x06userId\"\xa0\x03\n" +
+	"\auser_id\x18\x06 \x01(\tR\x06userIdB\x0e\n" +
+	"\f_description\"\xa0\x03\n" +
 	"\x11CreateTaskRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12%\n" +
 	"\vdescription\x18\x02 \x01(\tH\x00R\vdescription\x88\x01\x01\x12\x17\n" +
@@ -3502,6 +3503,7 @@ func file_task_proto_init() {
 		return
 	}
 	file_task_proto_msgTypes[0].OneofWrappers = []any{}
+	file_task_proto_msgTypes[3].OneofWrappers = []any{}
 	file_task_proto_msgTypes[4].OneofWrappers = []any{}
 	file_task_proto_msgTypes[6].OneofWrappers = []any{}
 	file_task_proto_msgTypes[12].OneofWrappers = []any{}
