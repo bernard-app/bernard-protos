@@ -1025,8 +1025,8 @@ func (x *GetListTaskResponse) GetTasks() []*Task {
 type GetGroupTasksRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	GroupId       int64                  `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	Limit         uint64                 `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
-	Offset        uint64                 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Limit         uint64                 `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
+	Offset        uint64                 `protobuf:"varint,4,opt,name=offset,proto3" json:"offset,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3173,8 +3173,8 @@ const file_task_proto_rawDesc = "" +
 	"\x05tasks\x18\x01 \x03(\v2\r.task_v1.TaskR\x05tasks\"_\n" +
 	"\x14GetGroupTasksRequest\x12\x19\n" +
 	"\bgroup_id\x18\x01 \x01(\x03R\agroupId\x12\x14\n" +
-	"\x05limit\x18\x02 \x01(\x04R\x05limit\x12\x16\n" +
-	"\x06offset\x18\x03 \x01(\x04R\x06offset\"<\n" +
+	"\x05limit\x18\x03 \x01(\x04R\x05limit\x12\x16\n" +
+	"\x06offset\x18\x04 \x01(\x04R\x06offset\"<\n" +
 	"\x15GetGroupTasksResponse\x12#\n" +
 	"\x05tasks\x18\x01 \x03(\v2\r.task_v1.TaskR\x05tasks\"-\n" +
 	"\x12ArchiveTaskRequest\x12\x17\n" +

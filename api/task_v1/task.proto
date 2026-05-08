@@ -151,8 +151,8 @@ message GetListTaskResponse {
 
 message GetGroupTasksRequest {
   int64 group_id = 1;
-  uint64 limit = 2;
-  uint64 offset = 3;
+  uint64 limit = 3;
+  uint64 offset = 4;
 }
 
 message GetGroupTasksResponse {
