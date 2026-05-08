@@ -15,7 +15,7 @@ message Task {
   optional string status = 6;
 
   google.protobuf.Timestamp start_time = 7;
-  google.protobuf.Timestamp dead = 8;
+  google.protobuf.Timestamp deadline = 8;
 
   optional int64 group_id = 9;
   optional int64 project_id = 10;

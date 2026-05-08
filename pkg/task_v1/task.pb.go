@@ -31,7 +31,7 @@ type Task struct {
 	Priority      *int32                 `protobuf:"varint,5,opt,name=priority,proto3,oneof" json:"priority,omitempty"`
 	Status        *string                `protobuf:"bytes,6,opt,name=status,proto3,oneof" json:"status,omitempty"`
 	StartTime     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	Dead          *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=dead,proto3" json:"dead,omitempty"`
+	Deadline      *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=deadline,proto3" json:"deadline,omitempty"`
 	GroupId       *int64                 `protobuf:"varint,9,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"`
 	ProjectId     *int64                 `protobuf:"varint,10,opt,name=project_id,json=projectId,proto3,oneof" json:"project_id,omitempty"`
 	UserId        string                 `protobuf:"bytes,11,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -121,9 +121,9 @@ func (x *Task) GetStartTime() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *Task) GetDead() *timestamppb.Timestamp {
+func (x *Task) GetDeadline() *timestamppb.Timestamp {
 	if x != nil {
-		return x.Dead
+		return x.Deadline
 	}
 	return nil
 }
@@ -3059,7 +3059,7 @@ var File_task_proto protoreflect.FileDescriptor
 const file_task_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"task.proto\x12\atask_v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xdd\x04\n" +
+	"task.proto\x12\atask_v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe5\x04\n" +
 	"\x04Task\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12%\n" +
@@ -3068,8 +3068,8 @@ const file_task_proto_rawDesc = "" +
 	"\bpriority\x18\x05 \x01(\x05H\x01R\bpriority\x88\x01\x01\x12\x1b\n" +
 	"\x06status\x18\x06 \x01(\tH\x02R\x06status\x88\x01\x01\x129\n" +
 	"\n" +
-	"start_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x12.\n" +
-	"\x04dead\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\x04dead\x12\x1e\n" +
+	"start_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x126\n" +
+	"\bdeadline\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\bdeadline\x12\x1e\n" +
 	"\bgroup_id\x18\t \x01(\x03H\x03R\agroupId\x88\x01\x01\x12\"\n" +
 	"\n" +
 	"project_id\x18\n" +
@@ -3399,7 +3399,7 @@ var file_task_proto_goTypes = []any{
 var file_task_proto_depIdxs = []int32{
 	1,  // 0: task_v1.Task.tags:type_name -> task_v1.Tag
 	56, // 1: task_v1.Task.start_time:type_name -> google.protobuf.Timestamp
-	56, // 2: task_v1.Task.dead:type_name -> google.protobuf.Timestamp
+	56, // 2: task_v1.Task.deadline:type_name -> google.protobuf.Timestamp
 	56, // 3: task_v1.Task.created_at:type_name -> google.protobuf.Timestamp
 	56, // 4: task_v1.Task.updated_at:type_name -> google.protobuf.Timestamp
 	0,  // 5: task_v1.Group.tasks:type_name -> task_v1.Task
