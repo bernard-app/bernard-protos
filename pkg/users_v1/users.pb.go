@@ -27,6 +27,7 @@ type User struct {
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
 	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	Settings      *Settings              `protobuf:"bytes,5,opt,name=settings,proto3" json:"settings,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -87,6 +88,13 @@ func (x *User) GetStatus() string {
 		return x.Status
 	}
 	return ""
+}
+
+func (x *User) GetSettings() *Settings {
+	if x != nil {
+		return x.Settings
+	}
+	return nil
 }
 
 type Settings struct {
@@ -162,6 +170,9 @@ type CreateUserRequest struct {
 	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
 	Username      string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
 	Status        *string                `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Theme         int32                  `protobuf:"varint,4,opt,name=theme,proto3" json:"theme,omitempty"`
+	Timezone      string                 `protobuf:"bytes,5,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	Lang          string                 `protobuf:"bytes,6,opt,name=lang,proto3" json:"lang,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -213,6 +224,27 @@ func (x *CreateUserRequest) GetUsername() string {
 func (x *CreateUserRequest) GetStatus() string {
 	if x != nil && x.Status != nil {
 		return *x.Status
+	}
+	return ""
+}
+
+func (x *CreateUserRequest) GetTheme() int32 {
+	if x != nil {
+		return x.Theme
+	}
+	return 0
+}
+
+func (x *CreateUserRequest) GetTimezone() string {
+	if x != nil {
+		return x.Timezone
+	}
+	return ""
+}
+
+func (x *CreateUserRequest) GetLang() string {
+	if x != nil {
+		return x.Lang
 	}
 	return ""
 }
@@ -889,21 +921,25 @@ var File_users_proto protoreflect.FileDescriptor
 
 const file_users_proto_rawDesc = "" +
 	"\n" +
-	"\vusers.proto\x12\busers_v1\"`\n" +
+	"\vusers.proto\x12\busers_v1\"\x90\x01\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
 	"\busername\x18\x03 \x01(\tR\busername\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\"i\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12.\n" +
+	"\bsettings\x18\x05 \x01(\v2\x12.users_v1.SettingsR\bsettings\"i\n" +
 	"\bSettings\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
 	"\x05theme\x18\x02 \x01(\x05R\x05theme\x12\x1a\n" +
 	"\btimezone\x18\x03 \x01(\tR\btimezone\x12\x12\n" +
-	"\x04lang\x18\x04 \x01(\tR\x04lang\"m\n" +
+	"\x04lang\x18\x04 \x01(\tR\x04lang\"\xb3\x01\n" +
 	"\x11CreateUserRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x1b\n" +
-	"\x06status\x18\x03 \x01(\tH\x00R\x06status\x88\x01\x01B\t\n" +
+	"\x06status\x18\x03 \x01(\tH\x00R\x06status\x88\x01\x01\x12\x14\n" +
+	"\x05theme\x18\x04 \x01(\x05R\x05theme\x12\x1a\n" +
+	"\btimezone\x18\x05 \x01(\tR\btimezone\x12\x12\n" +
+	"\x04lang\x18\x06 \x01(\tR\x04langB\t\n" +
 	"\a_status\"8\n" +
 	"\x12CreateUserResponse\x12\"\n" +
 	"\x04user\x18\x01 \x01(\v2\x0e.users_v1.UserR\x04user\"f\n" +
@@ -988,34 +1024,35 @@ var file_users_proto_goTypes = []any{
 	(*GetSettingsResponse)(nil),      // 17: users_v1.GetSettingsResponse
 }
 var file_users_proto_depIdxs = []int32{
-	0,  // 0: users_v1.CreateUserResponse.user:type_name -> users_v1.User
-	0,  // 1: users_v1.UpdateUserResponse.user:type_name -> users_v1.User
-	0,  // 2: users_v1.UpdateUserStatusResponse.user:type_name -> users_v1.User
-	0,  // 3: users_v1.GetUserResponse.user:type_name -> users_v1.User
-	0,  // 4: users_v1.GetUsersListResponse.user:type_name -> users_v1.User
-	1,  // 5: users_v1.UpdateSettingsResponse.settings:type_name -> users_v1.Settings
-	1,  // 6: users_v1.GetSettingsResponse.settings:type_name -> users_v1.Settings
-	2,  // 7: users_v1.UserService.CreateUser:input_type -> users_v1.CreateUserRequest
-	4,  // 8: users_v1.UserService.UpdateUser:input_type -> users_v1.UpdateUserRequest
-	6,  // 9: users_v1.UserService.UpdateUserStatus:input_type -> users_v1.UpdateUserStatusRequest
-	8,  // 10: users_v1.UserService.SoftDeleteUser:input_type -> users_v1.SoftDeleteUserRequest
-	10, // 11: users_v1.UserService.GetUser:input_type -> users_v1.GetUserRequest
-	12, // 12: users_v1.UserService.GetUsersList:input_type -> users_v1.GetUsersListRequest
-	14, // 13: users_v1.UserService.UpdateSettings:input_type -> users_v1.UpdateSettingsRequest
-	16, // 14: users_v1.UserService.GetSettings:input_type -> users_v1.GetSettingsRequest
-	3,  // 15: users_v1.UserService.CreateUser:output_type -> users_v1.CreateUserResponse
-	5,  // 16: users_v1.UserService.UpdateUser:output_type -> users_v1.UpdateUserResponse
-	7,  // 17: users_v1.UserService.UpdateUserStatus:output_type -> users_v1.UpdateUserStatusResponse
-	9,  // 18: users_v1.UserService.SoftDeleteUser:output_type -> users_v1.SoftDeleteUserResponse
-	11, // 19: users_v1.UserService.GetUser:output_type -> users_v1.GetUserResponse
-	13, // 20: users_v1.UserService.GetUsersList:output_type -> users_v1.GetUsersListResponse
-	15, // 21: users_v1.UserService.UpdateSettings:output_type -> users_v1.UpdateSettingsResponse
-	17, // 22: users_v1.UserService.GetSettings:output_type -> users_v1.GetSettingsResponse
-	15, // [15:23] is the sub-list for method output_type
-	7,  // [7:15] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	1,  // 0: users_v1.User.settings:type_name -> users_v1.Settings
+	0,  // 1: users_v1.CreateUserResponse.user:type_name -> users_v1.User
+	0,  // 2: users_v1.UpdateUserResponse.user:type_name -> users_v1.User
+	0,  // 3: users_v1.UpdateUserStatusResponse.user:type_name -> users_v1.User
+	0,  // 4: users_v1.GetUserResponse.user:type_name -> users_v1.User
+	0,  // 5: users_v1.GetUsersListResponse.user:type_name -> users_v1.User
+	1,  // 6: users_v1.UpdateSettingsResponse.settings:type_name -> users_v1.Settings
+	1,  // 7: users_v1.GetSettingsResponse.settings:type_name -> users_v1.Settings
+	2,  // 8: users_v1.UserService.CreateUser:input_type -> users_v1.CreateUserRequest
+	4,  // 9: users_v1.UserService.UpdateUser:input_type -> users_v1.UpdateUserRequest
+	6,  // 10: users_v1.UserService.UpdateUserStatus:input_type -> users_v1.UpdateUserStatusRequest
+	8,  // 11: users_v1.UserService.SoftDeleteUser:input_type -> users_v1.SoftDeleteUserRequest
+	10, // 12: users_v1.UserService.GetUser:input_type -> users_v1.GetUserRequest
+	12, // 13: users_v1.UserService.GetUsersList:input_type -> users_v1.GetUsersListRequest
+	14, // 14: users_v1.UserService.UpdateSettings:input_type -> users_v1.UpdateSettingsRequest
+	16, // 15: users_v1.UserService.GetSettings:input_type -> users_v1.GetSettingsRequest
+	3,  // 16: users_v1.UserService.CreateUser:output_type -> users_v1.CreateUserResponse
+	5,  // 17: users_v1.UserService.UpdateUser:output_type -> users_v1.UpdateUserResponse
+	7,  // 18: users_v1.UserService.UpdateUserStatus:output_type -> users_v1.UpdateUserStatusResponse
+	9,  // 19: users_v1.UserService.SoftDeleteUser:output_type -> users_v1.SoftDeleteUserResponse
+	11, // 20: users_v1.UserService.GetUser:output_type -> users_v1.GetUserResponse
+	13, // 21: users_v1.UserService.GetUsersList:output_type -> users_v1.GetUsersListResponse
+	15, // 22: users_v1.UserService.UpdateSettings:output_type -> users_v1.UpdateSettingsResponse
+	17, // 23: users_v1.UserService.GetSettings:output_type -> users_v1.GetSettingsResponse
+	16, // [16:24] is the sub-list for method output_type
+	8,  // [8:16] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_users_proto_init() }

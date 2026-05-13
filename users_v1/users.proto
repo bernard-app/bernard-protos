@@ -9,6 +9,7 @@ message User {
     string email = 2;
     string username = 3;
     string status = 4;
+    Settings settings = 5;
 }
 
 message Settings {
@@ -34,6 +35,9 @@ message CreateUserRequest {
     string email = 1;
     string username = 2; 
     optional string status = 3;
+    int32 theme = 4;
+    string timezone = 5;
+    string lang = 6;
 }
 
 message CreateUserResponse {
