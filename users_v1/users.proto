@@ -20,28 +20,13 @@ message Settings {
 }
 
 service UserService {
-    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
     rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
     rpc UpdateUserStatus(UpdateUserStatusRequest) returns (UpdateUserStatusResponse);
-    rpc SoftDeleteUser(SoftDeleteUserRequest) returns (SoftDeleteUserResponse);
     rpc GetUser(GetUserRequest) returns (GetUserResponse);
     rpc GetUsersList(GetUsersListRequest) returns (GetUsersListResponse);
     
     rpc UpdateSettings(UpdateSettingsRequest) returns (UpdateSettingsResponse);
     rpc GetSettings(GetSettingsRequest) returns (GetSettingsResponse);
-}
-
-message CreateUserRequest {
-    string email = 1;
-    string username = 2; 
-    optional string status = 3;
-    int32 theme = 4;
-    string timezone = 5;
-    string lang = 6;
-}
-
-message CreateUserResponse {
-    User user = 1;
 }
 
 message UpdateUserRequest {
@@ -59,13 +44,6 @@ message UpdateUserStatusRequest {
 
 message UpdateUserStatusResponse {
     User user = 1;
-}
-
-message SoftDeleteUserRequest {
-}
-
-message SoftDeleteUserResponse {
-    bool success = 1;
 }
 
 message GetUserRequest {

@@ -17,3 +17,12 @@ generate-users:
 	--go_out=pkg/users_v1 --go_opt=paths=source_relative \
 	--go-grpc_out=pkg/users_v1 --go-grpc_opt=paths=source_relative \
 	users.proto
+
+generate-users-internal:
+	mkdir -p pkg/users_internal_v1 \
+
+	protoc --proto_path=users_internal_v1 \
+	--proto_path=. \
+	--go_out=pkg/users_internal_v1 --go_opt=paths=source_relative \
+	--go-grpc_out=pkg/users_internal_v1 --go-grpc_opt=paths=source_relative \
+	users.internal.proto

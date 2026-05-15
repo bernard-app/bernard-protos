@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package users_internal_v1;
+
+option go_package = "github.com/bernard-app/bernard-protos/pkg/user_internal_v1;user_internal_v1";
+
+service UsersInternalService {
+    rpc CreateUserProfile(CreateUserProfileRequest) returns (CreateUserProfileResponse);
+    rpc DeleteUserProfile(DeleteUserProfileRequest) returns (DeleteUserProfileResponse);
+}
+
+message CreateUserProfileRequest {
+    string user_id = 1;
+    string email = 2;
+    string username = 3; 
+    optional string status = 4;
+    string timezone = 5;
+}
+
+message CreateUserProfileResponse {
+    string user_id = 1;
+}
+
+message DeleteUserProfileRequest {
+    string user_id = 1;
+}
+
+message DeleteUserProfileResponse {
+    bool success = 1;
+}
