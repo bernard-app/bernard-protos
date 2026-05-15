@@ -165,28 +165,27 @@ func (x *Settings) GetLang() string {
 	return ""
 }
 
-type UpdateUserRequest struct {
+type UpdateUserNameRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Email         *string                `protobuf:"bytes,1,opt,name=email,proto3,oneof" json:"email,omitempty"`
-	Username      *string                `protobuf:"bytes,2,opt,name=username,proto3,oneof" json:"username,omitempty"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdateUserRequest) Reset() {
-	*x = UpdateUserRequest{}
+func (x *UpdateUserNameRequest) Reset() {
+	*x = UpdateUserNameRequest{}
 	mi := &file_users_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateUserRequest) String() string {
+func (x *UpdateUserNameRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateUserRequest) ProtoMessage() {}
+func (*UpdateUserNameRequest) ProtoMessage() {}
 
-func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
+func (x *UpdateUserNameRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_users_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -198,46 +197,39 @@ func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateUserRequest.ProtoReflect.Descriptor instead.
-func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateUserNameRequest.ProtoReflect.Descriptor instead.
+func (*UpdateUserNameRequest) Descriptor() ([]byte, []int) {
 	return file_users_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *UpdateUserRequest) GetEmail() string {
-	if x != nil && x.Email != nil {
-		return *x.Email
+func (x *UpdateUserNameRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
 	}
 	return ""
 }
 
-func (x *UpdateUserRequest) GetUsername() string {
-	if x != nil && x.Username != nil {
-		return *x.Username
-	}
-	return ""
-}
-
-type UpdateUserResponse struct {
+type UpdateUserNameResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	User          *User                  `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdateUserResponse) Reset() {
-	*x = UpdateUserResponse{}
+func (x *UpdateUserNameResponse) Reset() {
+	*x = UpdateUserNameResponse{}
 	mi := &file_users_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateUserResponse) String() string {
+func (x *UpdateUserNameResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateUserResponse) ProtoMessage() {}
+func (*UpdateUserNameResponse) ProtoMessage() {}
 
-func (x *UpdateUserResponse) ProtoReflect() protoreflect.Message {
+func (x *UpdateUserNameResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_users_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -249,12 +241,12 @@ func (x *UpdateUserResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateUserResponse.ProtoReflect.Descriptor instead.
-func (*UpdateUserResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateUserNameResponse.ProtoReflect.Descriptor instead.
+func (*UpdateUserNameResponse) Descriptor() ([]byte, []int) {
 	return file_users_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *UpdateUserResponse) GetUser() *User {
+func (x *UpdateUserNameResponse) GetUser() *User {
 	if x != nil {
 		return x.User
 	}
@@ -263,7 +255,7 @@ func (x *UpdateUserResponse) GetUser() *User {
 
 type UpdateUserStatusRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Status        *string                `protobuf:"bytes,1,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -299,8 +291,8 @@ func (*UpdateUserStatusRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *UpdateUserStatusRequest) GetStatus() string {
-	if x != nil && x.Status != nil {
-		return *x.Status
+	if x != nil {
+		return x.Status
 	}
 	return ""
 }
@@ -724,17 +716,13 @@ const file_users_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
 	"\x05theme\x18\x02 \x01(\x05R\x05theme\x12\x1a\n" +
 	"\btimezone\x18\x03 \x01(\tR\btimezone\x12\x12\n" +
-	"\x04lang\x18\x04 \x01(\tR\x04lang\"f\n" +
-	"\x11UpdateUserRequest\x12\x19\n" +
-	"\x05email\x18\x01 \x01(\tH\x00R\x05email\x88\x01\x01\x12\x1f\n" +
-	"\busername\x18\x02 \x01(\tH\x01R\busername\x88\x01\x01B\b\n" +
-	"\x06_emailB\v\n" +
-	"\t_username\"8\n" +
-	"\x12UpdateUserResponse\x12\"\n" +
-	"\x04user\x18\x01 \x01(\v2\x0e.users_v1.UserR\x04user\"A\n" +
-	"\x17UpdateUserStatusRequest\x12\x1b\n" +
-	"\x06status\x18\x01 \x01(\tH\x00R\x06status\x88\x01\x01B\t\n" +
-	"\a_status\">\n" +
+	"\x04lang\x18\x04 \x01(\tR\x04lang\"3\n" +
+	"\x15UpdateUserNameRequest\x12\x1a\n" +
+	"\busername\x18\x01 \x01(\tR\busername\"<\n" +
+	"\x16UpdateUserNameResponse\x12\"\n" +
+	"\x04user\x18\x01 \x01(\v2\x0e.users_v1.UserR\x04user\"1\n" +
+	"\x17UpdateUserStatusRequest\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\">\n" +
 	"\x18UpdateUserStatusResponse\x12\"\n" +
 	"\x04user\x18\x01 \x01(\v2\x0e.users_v1.UserR\x04user\"\x10\n" +
 	"\x0eGetUserRequest\"5\n" +
@@ -756,10 +744,9 @@ const file_users_proto_rawDesc = "" +
 	"\bsettings\x18\x01 \x01(\v2\x12.users_v1.SettingsR\bsettings\"\x14\n" +
 	"\x12GetSettingsRequest\"E\n" +
 	"\x13GetSettingsResponse\x12.\n" +
-	"\bsettings\x18\x01 \x01(\v2\x12.users_v1.SettingsR\bsettings2\xe1\x03\n" +
-	"\vUserService\x12G\n" +
-	"\n" +
-	"UpdateUser\x12\x1b.users_v1.UpdateUserRequest\x1a\x1c.users_v1.UpdateUserResponse\x12Y\n" +
+	"\bsettings\x18\x01 \x01(\v2\x12.users_v1.SettingsR\bsettings2\xed\x03\n" +
+	"\vUserService\x12S\n" +
+	"\x0eUpdateUserName\x12\x1f.users_v1.UpdateUserNameRequest\x1a .users_v1.UpdateUserNameResponse\x12Y\n" +
 	"\x10UpdateUserStatus\x12!.users_v1.UpdateUserStatusRequest\x1a\".users_v1.UpdateUserStatusResponse\x12>\n" +
 	"\aGetUser\x12\x18.users_v1.GetUserRequest\x1a\x19.users_v1.GetUserResponse\x12M\n" +
 	"\fGetUsersList\x12\x1d.users_v1.GetUsersListRequest\x1a\x1e.users_v1.GetUsersListResponse\x12S\n" +
@@ -782,8 +769,8 @@ var file_users_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_users_proto_goTypes = []any{
 	(*User)(nil),                     // 0: users_v1.User
 	(*Settings)(nil),                 // 1: users_v1.Settings
-	(*UpdateUserRequest)(nil),        // 2: users_v1.UpdateUserRequest
-	(*UpdateUserResponse)(nil),       // 3: users_v1.UpdateUserResponse
+	(*UpdateUserNameRequest)(nil),    // 2: users_v1.UpdateUserNameRequest
+	(*UpdateUserNameResponse)(nil),   // 3: users_v1.UpdateUserNameResponse
 	(*UpdateUserStatusRequest)(nil),  // 4: users_v1.UpdateUserStatusRequest
 	(*UpdateUserStatusResponse)(nil), // 5: users_v1.UpdateUserStatusResponse
 	(*GetUserRequest)(nil),           // 6: users_v1.GetUserRequest
@@ -797,19 +784,19 @@ var file_users_proto_goTypes = []any{
 }
 var file_users_proto_depIdxs = []int32{
 	1,  // 0: users_v1.User.settings:type_name -> users_v1.Settings
-	0,  // 1: users_v1.UpdateUserResponse.user:type_name -> users_v1.User
+	0,  // 1: users_v1.UpdateUserNameResponse.user:type_name -> users_v1.User
 	0,  // 2: users_v1.UpdateUserStatusResponse.user:type_name -> users_v1.User
 	0,  // 3: users_v1.GetUserResponse.user:type_name -> users_v1.User
 	0,  // 4: users_v1.GetUsersListResponse.user:type_name -> users_v1.User
 	1,  // 5: users_v1.UpdateSettingsResponse.settings:type_name -> users_v1.Settings
 	1,  // 6: users_v1.GetSettingsResponse.settings:type_name -> users_v1.Settings
-	2,  // 7: users_v1.UserService.UpdateUser:input_type -> users_v1.UpdateUserRequest
+	2,  // 7: users_v1.UserService.UpdateUserName:input_type -> users_v1.UpdateUserNameRequest
 	4,  // 8: users_v1.UserService.UpdateUserStatus:input_type -> users_v1.UpdateUserStatusRequest
 	6,  // 9: users_v1.UserService.GetUser:input_type -> users_v1.GetUserRequest
 	8,  // 10: users_v1.UserService.GetUsersList:input_type -> users_v1.GetUsersListRequest
 	10, // 11: users_v1.UserService.UpdateSettings:input_type -> users_v1.UpdateSettingsRequest
 	12, // 12: users_v1.UserService.GetSettings:input_type -> users_v1.GetSettingsRequest
-	3,  // 13: users_v1.UserService.UpdateUser:output_type -> users_v1.UpdateUserResponse
+	3,  // 13: users_v1.UserService.UpdateUserName:output_type -> users_v1.UpdateUserNameResponse
 	5,  // 14: users_v1.UserService.UpdateUserStatus:output_type -> users_v1.UpdateUserStatusResponse
 	7,  // 15: users_v1.UserService.GetUser:output_type -> users_v1.GetUserResponse
 	9,  // 16: users_v1.UserService.GetUsersList:output_type -> users_v1.GetUsersListResponse
@@ -827,8 +814,6 @@ func file_users_proto_init() {
 	if File_users_proto != nil {
 		return
 	}
-	file_users_proto_msgTypes[2].OneofWrappers = []any{}
-	file_users_proto_msgTypes[4].OneofWrappers = []any{}
 	file_users_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
