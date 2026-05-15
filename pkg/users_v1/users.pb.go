@@ -167,7 +167,7 @@ func (x *Settings) GetLang() string {
 
 type UpdateUserNameRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Username      string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -716,9 +716,9 @@ const file_users_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
 	"\x05theme\x18\x02 \x01(\x05R\x05theme\x12\x1a\n" +
 	"\btimezone\x18\x03 \x01(\tR\btimezone\x12\x12\n" +
-	"\x04lang\x18\x04 \x01(\tR\x04lang\"3\n" +
+	"\x04lang\x18\x04 \x01(\tR\x04lang\"@\n" +
 	"\x15UpdateUserNameRequest\x12\x1a\n" +
-	"\busername\x18\x01 \x01(\tR\busername\"<\n" +
+	"\busername\x18\x02 \x01(\tR\busernameJ\x04\b\x01\x10\x02R\x05email\"<\n" +
 	"\x16UpdateUserNameResponse\x12\"\n" +
 	"\x04user\x18\x01 \x01(\v2\x0e.users_v1.UserR\x04user\"1\n" +
 	"\x17UpdateUserStatusRequest\x12\x16\n" +

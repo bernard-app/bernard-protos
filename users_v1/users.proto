@@ -30,7 +30,10 @@ service UserService {
 }
 
 message UpdateUserNameRequest {
-    string username = 1;
+    reserved 1;
+    reserved "email";
+    
+    string username = 2;
 }
 
 message UpdateUserNameResponse {
