@@ -23,11 +23,3 @@ generate-users-internal:
 	--go_out=./pkg/users_internal_v1 --go_opt=paths=source_relative \
 	--go-grpc_out=./pkg/users_internal_v1 --go-grpc_opt=paths=source_relative \
 	users.internal.proto
-
-generate-auth:
-	mkdir -p pkg/auth_v1 \
-	
-	protoc --proto_path=proto/auth_v1 \
-	--go_out=./pkg/auth_v1 --go_opt=paths=source_relative \
-	--go-grpc_out=./pkg/auth_v1 --go-grpc_opt=paths=source_relative \
-	auth.proto
