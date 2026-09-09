@@ -57,7 +57,6 @@ service TaskService {
   rpc DeleteTask(DeleteTaskRequest) returns (DeleteTaskResponse);
   rpc GetTask(GetTaskRequest) returns (GetTaskResponse);
   rpc GetListTask(GetListTaskRequest) returns (GetListTaskResponse);
-  rpc GetGroupTasks(GetGroupTasksRequest) returns (GetGroupTasksResponse);
 
   rpc ArchiveTask(ArchiveTaskRequest) returns (ArchiveTaskResponse);
 
@@ -146,16 +145,6 @@ message GetListTaskRequest {
 }
 
 message GetListTaskResponse {
-  repeated Task tasks = 1;
-}
-
-message GetGroupTasksRequest {
-  int64 group_id = 1;
-  uint64 limit = 3;
-  uint64 offset = 4;
-}
-
-message GetGroupTasksResponse {
   repeated Task tasks = 1;
 }
 
